@@ -192,6 +192,10 @@ document.addEventListener("DOMContentLoaded", function() {
         line.style.top = `${line_current_top + line_speed}px`;
         line2.style.top = `${line_current_top2 + line_speed}px`;
         line3.style.top = `${line_current_top3 + line_speed}px`;
+        console.log(line.style.top);
+        console.log(line2.style.top);
+        console.log(line3.style.top);
+        console.log("-------------------------------------------------");
     }
     restart_btn.addEventListener("click", function() {
         location.reload();

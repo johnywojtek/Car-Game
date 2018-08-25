@@ -2,7 +2,7 @@ body {
     height: 100%;
     width: 100%;
     margin: 0;
-    background-image: url(../depositphotos_104247816-stock-illustration-fir-forest-game-background.jpg);
+    background-image: url(..img/depositphotos_104247816-stock-illustration-fir-forest-game-background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     font-family: sans-serif;
@@ -25,13 +25,13 @@ body {
     background-color: rgba(255, 255, 255, 0.5);
 }
 #line_1 {
-    top: -150px;
+    top: -31%;
 }
 #line_2 {
-    top: 150px;
+    top: 10%;
 }
 #line_3 {
-    top: 450px;
+    top: 51%;
 }
 .car {
     z-index: 4;
@@ -181,18 +181,20 @@ body {
 }
 #score_div {
     position: absolute;
+    border-radius: 30px;
     margin-top: 20%;
     margin-left: 10%;
     font-size: 35px;
     background-color: white;
     color: #454545;
-    padding: 10px;
+    padding: 30px;
     box-shadow: 4px 4px 0px 1px #808080;
     animation: mymove 1s infinite;
     animation-direction: alternate;
 }
 #help {
     text-align: center;
+    font-size: 20px;
 }
 @keyframes mymove {
     from {
