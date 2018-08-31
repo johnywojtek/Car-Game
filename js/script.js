@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var ref = database.ref("scores");
 
         ref.orderByChild("score").on("value", gotData, errData);
-
+        var counterList = 0;
         function gotData(data) {
             let sorted = [];
 
@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
             var counter = 0;
 
-            var counterList = 0;
             for (var key in poSorted) {
                 counterList++;
                 counter++;

@@ -67,8 +67,8 @@ tr {
     margin-top: 20px;
     background-color: #292929;
     overflow: hidden;
-    max-height: 730px;
-    max-width: 370px;
+    min-height: 730px;
+    min-width: 370px;
 }
 .gameContainer {
     display: flex;
