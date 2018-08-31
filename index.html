@@ -7,70 +7,122 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>End Project Game</title>
   <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-  <div id="help">
-    <p>Controls: Right, Left, Up & Down arrow keys.</p>
-  </div>
-  <div id="score_div">
-    Score: <span id="score">0</span>
-  </div>
-  <div id="container">
-    <div id="line_1" class="line"></div>
-    <div id="line_2" class="line"></div>
-    <div id="line_3" class="line"></div>
-    <div id="car" class="car">
-      <div class="f_glass"></div>
-      <div class="l_glass"></div>
-      <div class="r_glass"></div>
-      <div class="b_glass"></div>
-      <div class="stripe_l"></div>
-      <div class="stripe_r"></div>
-
-      <div class="f_tyre_l"></div>
-      <div class="f_tyre_r"></div>
-      <div class="b_tyre_l"></div>
-      <div class="b_tyre_r"></div>
-    </div>
-    <div id="car_1" class="car">
-      <div class="f_glass"></div>
-      <div class="b_glass"></div>
-
-      <div class="f_tyre_l"></div>
-      <div class="f_tyre_r"></div>
-      <div class="b_tyre_l"></div>
-      <div class="b_tyre_r"></div>
-    </div>
-    <div id="car_2" class="car">
-      <div class="f_glass"></div>
-      <div class="b_glass"></div>
-
-      <div class="f_tyre_l"></div>
-      <div class="f_tyre_r"></div>
-      <div class="b_tyre_l"></div>
-      <div class="b_tyre_r"></div>
-    </div>
-    <div id="car_3" class="car">
-      <div class="f_glass"></div>
-      <div class="b_glass"></div>
-
-      <div class="f_tyre_l"></div>
-      <div class="f_tyre_r"></div>
-      <div class="b_tyre_l"></div>
-      <div class="b_tyre_r"></div>
-    </div>
-    <div id="restart_div">
-      <button id="restart">
-        Restart<br>
-        <small class="small_text">(press Enter)</small>
-      </button>
-    </div>
-  </div>
-
 
 
   <script src="js/script.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
+
+</head>
+
+<body>
+
+  <div class="gameContainer">
+    <div>
+      <div id="help">
+
+        <div id="score_div">
+          Score: <span id="score"> 0</span>
+        </div>
+        <pre>
+          <code>
+Controls: 
+Right,
+Left,
+Up,
+Down
+          </code>
+        </pre>
+      </div>
+
+    </div>
+    <div id="container">
+      <div id="line_1" class="line"></div>
+      <div id="line_2" class="line"></div>
+      <div id="line_3" class="line"></div>
+      <div id="car" class="car">
+        <div class="f_glass"></div>
+        <div class="l_glass"></div>
+        <div class="r_glass"></div>
+        <div class="b_glass"></div>
+        <div class="stripe_l"></div>
+        <div class="stripe_r"></div>
+
+        <div class="f_tyre_l"></div>
+        <div class="f_tyre_r"></div>
+        <div class="b_tyre_l"></div>
+        <div class="b_tyre_r"></div>
+      </div>
+      <div id="car_1" class="car">
+        <div class="f_glass"></div>
+        <div class="b_glass"></div>
+        <div class="l_glass"></div>
+        <div class="r_glass"></div>
+        <div class="star"></div>
+        <div class="io"></div>
+        <div class="f_tyre_l"></div>
+        <div class="f_tyre_r"></div>
+        <div class="b_tyre_l"></div>
+        <div class="b_tyre_r"></div>
+      </div>
+      <div id="car_2" class="car">
+        <div class="f_glass"></div>
+        <div class="b_glass"></div>
+        <div class="l_glass"></div>
+        <div class="star"></div>
+        <div class="io"></div>
+        <div class="r_glass"></div>
+        <div class="f_tyre_l"></div>
+        <div class="f_tyre_r"></div>
+        <div class="b_tyre_l"></div>
+        <div class="b_tyre_r"></div>
+      </div>
+      <div id="car_3" class="car">
+        <div class="f_glass"></div>
+        <div class="b_glass"></div>
+        <div class="l_glass"></div>
+        <div class="r_glass"></div>
+        <div class="star"></div>
+        <div class="io"></div>
+        <div class="f_tyre_l"></div>
+        <div class="f_tyre_r"></div>
+        <div class="b_tyre_l"></div>
+        <div class="b_tyre_r"></div>
+      </div>
+
+      <div id="restart_div">
+        <h1 class="busted">Busted</h1>
+        <button id="restart">
+          Restart<br>
+          <small class="small_text">(press Enter)</small>
+
+        </button>
+        <label class="restartText" for="name">Your Name:</label>
+        <input class="inputName" id="name" type="text" autofocus>
+        <p class="yourScore"></p>
+      </div>
+    </div>
+    <div>
+      <h2>TOP 10 Scoreboard</h2>
+      <div class="tableCont">
+        <table>
+          <thead>
+            <tr>
+              <th class="td1">RANK</th>
+              <th class="td2">NAME</th>
+              <th class="td3">SCORE</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
 
 </body>
 

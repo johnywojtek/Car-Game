@@ -1,13 +1,82 @@
 document.addEventListener("DOMContentLoaded", function() {
-    //creating variables
+    //FireBase config
 
+    var config = {
+        apiKey: "AIzaSyC1P4-HtTDMf1K5Mm3VUxRmvaAEByTcr1E",
+        authDomain: "race-game-33c65.firebaseapp.com",
+        databaseURL: "https://race-game-33c65.firebaseio.com",
+        projectId: "race-game-33c65",
+        storageBucket: "race-game-33c65.appspot.com",
+        messagingSenderId: "1041217120872"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
+
+    var ref = database.ref("scores");
+
+    ref.orderByChild("score").on("value", gotData, errData);
+
+    function gotData(data) {
+        let sorted = [];
+
+        data.forEach(function(child) {
+            sorted.push(child.val());
+            // console.log(child.val()); // NOW THE CHILDREN PRINT IN ORDER
+        });
+        let poSorted = sorted.reverse();
+
+        var counter = 0;
+        // console.log(poSorted.length);
+        var counterList = 0;
+        for (var key in poSorted) {
+            counterList++;
+            counter++;
+            if (counterList <= 10) {
+                var playerName = poSorted[key].name;
+                var playerScore = poSorted[key].score;
+                var table = document.querySelector("tbody");
+                var tr = document.createElement("tr");
+                table.appendChild(tr);
+                var td1 = document.createElement("td");
+                td1.className = "td1";
+                var td2 = document.createElement("td");
+                td2.className = "td2";
+                var td3 = document.createElement("td");
+                td3.className = "td3";
+
+                if (counter == 1) {
+                    td1.innerText = `${counter}st`;
+                } else if (counter == 2) {
+                    td1.innerText = `${counter}nd`;
+                } else if (counter == 3) {
+                    td1.innerText = `${counter}rd`;
+                } else {
+                    td1.innerText = `${counter}th`;
+                }
+                tr.appendChild(td1);
+                td2.innerText = `${playerName}`;
+
+                tr.appendChild(td2);
+
+                td3.innerText = `${playerScore}`;
+                tr.appendChild(td3);
+            } else {
+                return;
+            }
+        }
+    }
+    function errData(err) {
+        console.log("Errrorrr !!!");
+        console.log(err);
+    }
+
+    // Document Object Model
     var anim_id;
     var container = document.querySelector("#container");
     var car = document.querySelector("#car");
+    var busted = document.querySelector(".busted");
     car.style.left = "100px";
-
     car.style.top = "500px";
-    var score_div = document.querySelector("#score_div");
     var car_1 = document.querySelector("#car_1");
     var car_2 = document.querySelector("#car_2");
     var car_3 = document.querySelector("#car_3");
@@ -16,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var line_3 = document.querySelector("#line_3");
     var restart_div = document.querySelector("#restart_div");
     var restart_btn = document.querySelector("#restart");
+    var inputName = document.querySelector(".inputName");
     var score = document.querySelector("#score");
 
     //creating initial setups
@@ -35,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var move_left = false;
     var move_up = false;
     var move_down = false;
-    // Move cars
+    // Move cars on key's
 
     document.addEventListener("keydown", e => {
         if (game_over === false) {
@@ -70,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    //creating functions that's are need to move car
+    //creating functions that's move car
     function left() {
         if (game_over === false && parseInt(car.style.left) > 0) {
             car.style.left = `${parseInt(car.style.left) - 5}px`;
@@ -107,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     /* Creating functions that move the cars and lines */
     anim_id = requestAnimationFrame(repeat);
+
     function repeat() {
         if (
             collision(car, car_1) ||
@@ -123,35 +194,9 @@ document.addEventListener("DOMContentLoaded", function() {
             speed++;
             line_speed++;
         }
+        var accScore = Math.floor(score_counter / 10);
+        score.innerText = accScore;
 
-        score.innerText = score_counter;
-        if (score_counter >= 200) {
-            score_div.style.backgroundColor = "#FFFFCC";
-        }
-        if (score_counter >= 400) {
-            score_div.style.backgroundColor = "#FFEDA0";
-        }
-        if (score_counter >= 600) {
-            score_div.style.backgroundColor = "#FED976";
-        }
-        if (score_counter >= 800) {
-            score_div.style.backgroundColor = "#FEB24C";
-        }
-        if (score_counter >= 1000) {
-            score_div.style.backgroundColor = "#FD8D3C";
-        }
-        if (score_counter >= 1200) {
-            score_div.style.backgroundColor = "#FC4E2A";
-        }
-        if (score_counter >= 1400) {
-            score_div.style.backgroundColor = "#E31A1C";
-        }
-        if (score_counter >= 1600) {
-            score_div.style.backgroundColor = "#BD0026";
-        }
-        if (score_counter >= 1800) {
-            score_div.style.backgroundColor = "#800026";
-        }
         car_down(car_1);
         car_down(car_2);
         car_down(car_3);
@@ -160,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         anim_id = requestAnimationFrame(repeat);
     }
+
     function car_down(car) {
         var car_current_top = car.offsetTop;
         var car_left = parseInt(Math.random() * (container_width - car_width));
@@ -192,32 +238,74 @@ document.addEventListener("DOMContentLoaded", function() {
         line.style.top = `${line_current_top + line_speed}px`;
         line2.style.top = `${line_current_top2 + line_speed}px`;
         line3.style.top = `${line_current_top3 + line_speed}px`;
-        console.log(line.style.top);
-        console.log(line2.style.top);
-        console.log(line3.style.top);
-        console.log("-------------------------------------------------");
     }
-    restart_btn.addEventListener("click", function() {
+
+    //clean list function
+    function cleanList() {
+        //clean list
+        var accList = document.querySelectorAll(".accList");
+        [...accList].map(e => {
+            return e.parentElement.removeChild(e);
+        });
+    }
+    function dataPush() {
+        var data = {
+            name: inputName.value,
+            score: Number(score.innerText)
+        };
+
+        var database = firebase.database();
+        var ref = database.ref("scores");
+
         location.reload();
+        ref.push(data);
+    }
+    //event on restart_btn that restart the game and send data to firebase
+    restart_btn.addEventListener("click", function() {
+        if (inputName.value.length < 1 || inputName.value.length >= 15) {
+            alert("Give me your name");
+        } else {
+            cleanList();
+            dataPush();
+        }
     });
 
     function stop_the_game() {
+        //clean animation
         game_over = true;
         cancelAnimationFrame(anim_id);
         cancelAnimationFrame(move_right);
         cancelAnimationFrame(move_left);
         cancelAnimationFrame(move_up);
         cancelAnimationFrame(move_down);
-        restart_div.style.display = "block";
+        //make restart div and busted visible
+        restart_div.style.display = "flex";
+        busted.style.display = "block";
+
+        //event on enter that restart the game and send data to firebase
         document.addEventListener("keypress", function(e) {
+            cleanList();
             var key = e.which || e.keyCode;
+
             if (key === 13) {
-                location.reload();
+                if (
+                    inputName.value.length < 1 ||
+                    inputName.value.length >= 15
+                ) {
+                    alert("Give me your name");
+                } else {
+                    dataPush();
+                }
             }
         });
+
+        //when you lost you can see your score
+        document.querySelector(".yourScore").innerText = `Score: ${
+            score.innerText
+        }`;
     }
 
-    /* ------------------------------GAME CODE ENDS HERE------------------------------------------- */
+    // colision algorithm
 
     function collision(car1, car2) {
         var x1 = car1.offsetLeft;
