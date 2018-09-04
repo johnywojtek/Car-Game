@@ -2,9 +2,9 @@
 
 ## Built With
 
-* [Firebase](https://firebase.google.com/) - Realtime Database
+* [Firebase](https://firebase.google.com/) - Realtime Database for store player nick name and score
 * HTML
-* CSS
+* CSS (SASS)
 * JavaScript - vanilla js
 
 ## Do you want to play ?
