@@ -3,9 +3,9 @@
 ## Built With
 
 * [Firebase](https://firebase.google.com/) - Realtime Database
-* [HTML]
-* [CSS]
-* [JavaScript] - vanilla js
+* HTML
+* CSS
+* JavaScript - vanilla js
 
 ## Do you want to play ?
 
