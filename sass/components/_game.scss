@@ -1,0 +1,88 @@
+#container {
+    position: relative;
+    height: 730px;
+    width: 370px;
+
+    margin-top: 20px;
+    background-color: $color-dark-main;
+    overflow: hidden;
+    min-height: 730px;
+    min-width: 370px;
+}
+.gameContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.line {
+    position: absolute;
+    height: 150px;
+    width: 4%;
+    margin-left: 48%;
+    background-color: $color-silver;
+}
+#line_1 {
+    top: -31%;
+}
+#line_2 {
+    top: 10%;
+}
+#line_3 {
+    top: 51%;
+}
+
+.busted {
+    position: absolute;
+    top: -1%;
+    display: none;
+    font-size: 50px;
+    text-shadow: 2px 2px $color-orange;
+    animation: busted 1s infinite;
+    animation-direction: alternate;
+    color: $color-gold;
+    z-index: 1000;
+}
+
+#restart_div {
+    z-index: 100;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $color-dark-main;
+    color: $color-white;
+    font-family: sans-serif;
+    font-size: 40px;
+    text-align: center;
+    display: none;
+    align-items: center;
+    flex-direction: column;
+}
+
+#restart {
+    border: none;
+    padding: 25px;
+    color: $color-white;
+    background-color: $color-silver;
+    font-size: 30px;
+    margin-top: 30%;
+    width: 40%;
+    align-items: center;
+    color: $color-black;
+}
+.restartText {
+    margin-top: 30px;
+}
+.inputName {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 15px;
+}
+.inputName:focus {
+    box-shadow: 0 0 10px $color-silver;
+    border-color: $color-silver;
+    border-width: 5px;
+}
+.small_text {
+    font-size: 15px;
+}

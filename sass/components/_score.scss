@@ -1,0 +1,17 @@
+#help {
+    font-size: 28px;
+    color: $color-dark-main;
+}
+
+#score_div {
+    width: 180px;
+    height: 90px;
+    border-radius: 30px;
+    background-color: $color-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 4px 4px 0px 1px $color-grey;
+    animation: mymove 1s infinite;
+    animation-direction: alternate;
+}

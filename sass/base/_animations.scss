@@ -1,0 +1,26 @@
+@keyframes mymove {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+@keyframes myblue {
+    from {
+        border-right: 9px solid #2d5cf6;
+        border-left: 9px solid $color-black;
+    }
+    to {
+        border-left: 9px solid red;
+        border-right: 9px solid $color-black;
+    }
+}
+@keyframes busted {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(2);
+    }
+}

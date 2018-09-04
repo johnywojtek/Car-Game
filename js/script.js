@@ -1,70 +1,69 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var page = 1;
     //FireBase config
-    if (page === 1) {
-        var config = {
-            apiKey: "AIzaSyC1P4-HtTDMf1K5Mm3VUxRmvaAEByTcr1E",
-            authDomain: "race-game-33c65.firebaseapp.com",
-            databaseURL: "https://race-game-33c65.firebaseio.com",
-            projectId: "race-game-33c65",
-            storageBucket: "race-game-33c65.appspot.com",
-            messagingSenderId: "1041217120872"
-        };
-        firebase.initializeApp(config);
-        var database = firebase.database();
 
-        var ref = database.ref("scores");
+    var config = {
+        apiKey: "AIzaSyC1P4-HtTDMf1K5Mm3VUxRmvaAEByTcr1E",
+        authDomain: "race-game-33c65.firebaseapp.com",
+        databaseURL: "https://race-game-33c65.firebaseio.com",
+        projectId: "race-game-33c65",
+        storageBucket: "race-game-33c65.appspot.com",
+        messagingSenderId: "1041217120872"
+    };
+    firebase.initializeApp(config);
+    var database = firebase.database();
 
-        ref.orderByChild("score").on("value", gotData, errData);
-        var counterList = 0;
-        function gotData(data) {
-            let sorted = [];
+    var ref = database.ref("scores");
 
-            data.forEach(function(child) {
-                sorted.push(child.val());
-            });
-            let poSorted = sorted.reverse();
+    ref.orderByChild("score").on("value", gotData, errData);
+    var counterList = 0;
+    function gotData(data) {
+        let sorted = [];
 
-            var counter = 0;
+        data.forEach(function(child) {
+            sorted.push(child.val());
+        });
+        let poSorted = sorted.reverse();
 
-            for (var key in poSorted) {
-                counterList++;
-                counter++;
-                if (counterList <= 10) {
-                    var playerName = poSorted[key].name;
-                    var playerScore = poSorted[key].score;
-                    var table = document.querySelector("tbody");
-                    var tr = document.createElement("tr");
-                    table.appendChild(tr);
-                    var td1 = document.createElement("td");
-                    td1.className = "td1";
-                    var td2 = document.createElement("td");
-                    td2.className = "td2";
-                    var td3 = document.createElement("td");
-                    td3.className = "td3";
+        var counter = 0;
 
-                    if (counter == 1) {
-                        td1.innerText = `${counter}st`;
-                    } else if (counter == 2) {
-                        td1.innerText = `${counter}nd`;
-                    } else if (counter == 3) {
-                        td1.innerText = `${counter}rd`;
-                    } else {
-                        td1.innerText = `${counter}th`;
-                    }
-                    tr.appendChild(td1);
-                    td2.innerText = `${playerName}`;
+        for (var key in poSorted) {
+            counterList++;
+            counter++;
+            if (counterList <= 10) {
+                var playerName = poSorted[key].name;
+                var playerScore = poSorted[key].score;
+                var table = document.querySelector("tbody");
+                var tr = document.createElement("tr");
+                table.appendChild(tr);
+                var td1 = document.createElement("td");
+                td1.className = "td1";
+                var td2 = document.createElement("td");
+                td2.className = "td2";
+                var td3 = document.createElement("td");
+                td3.className = "td3";
 
-                    tr.appendChild(td2);
-
-                    td3.innerText = `${playerScore}`;
-                    tr.appendChild(td3);
+                if (counter == 1) {
+                    td1.innerText = `${counter}st`;
+                } else if (counter == 2) {
+                    td1.innerText = `${counter}nd`;
+                } else if (counter == 3) {
+                    td1.innerText = `${counter}rd`;
                 } else {
-                    return;
+                    td1.innerText = `${counter}th`;
                 }
+                tr.appendChild(td1);
+                td2.innerText = `${playerName}`;
+
+                tr.appendChild(td2);
+
+                td3.innerText = `${playerScore}`;
+                tr.appendChild(td3);
+            } else {
+                return;
             }
         }
     }
+
     function errData(err) {
         console.log("Errrorrr !!!");
         console.log(err);
